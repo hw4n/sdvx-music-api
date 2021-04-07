@@ -15,11 +15,21 @@ function connectDB() {
 function insertMusicArray() {
   const json = JSON.parse(fs.readFileSync('./data/music_db.json').toString());
   dbMusic.insertMany(json).then(() => {
-    console.log('Inserted music data');
+    console.log('Inserted music data to database');
   });
 }
 
-export default function initialize() {
+export default function initialize(argv) {
+  const { resetDb } = argv;
   connectDB();
-  insertMusicArray();
+  if (resetDb) {
+    dbMusic.deleteMany({}).then(() => {
+      console.log('Dropped music data on database');
+    });
+  }
+  dbMusic.countDocuments().then((length) => {
+    if (!length) {
+      insertMusicArray();
+    }
+  });
 }
