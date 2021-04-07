@@ -1,4 +1,7 @@
-const Iconv = require('iconv').Iconv;
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-param-reassign */
+import Iconv from 'iconv';
+
 const fs = require('fs');
 const convert = require('xml-js');
 
@@ -12,9 +15,10 @@ const utf8xml = iconv.convert(musicDB).toString();
 
 function removeTextAttribute(value, parentElement) {
   try {
-    var keyNo = Object.keys(parentElement._parent).length;
-    var keyName = Object.keys(parentElement._parent)[keyNo-1];
+    const keyNo = Object.keys(parentElement._parent).length;
+    const keyName = Object.keys(parentElement._parent)[keyNo - 1];
     parentElement._parent[keyName] = value;
+  // eslint-disable-next-line no-empty
   } catch (e) {}
 }
 
@@ -22,9 +26,9 @@ const utf8json = convert.xml2js(utf8xml, {
   compact: true,
   ignoreDeclaration: true,
   ignoreAttributes: true,
-  textFn: removeTextAttribute
+  textFn: removeTextAttribute,
 });
 
-utf8json.mdb.music.forEach(music => delete music.tag);
+utf8json.mdb.music.forEach((music) => delete music.tag);
 
 fs.writeFileSync('./data/music_db.json', JSON.stringify(utf8json.mdb.music, null, 2));
