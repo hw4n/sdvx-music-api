@@ -5,6 +5,7 @@ module.exports = {
   },
   extends: [
     'airbnb-base',
+    'plugin:import/typescript',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -17,6 +18,6 @@ module.exports = {
   rules: {
     'import/extensions': 'off',
     'linebreak-style': ['error', (process.platform === 'win32' ? 'windows' : 'unix')],
-    'no-console': ['error', { allow: ['log'] }],
+    'no-console': ['error', { allow: ['log', 'error'] }],
   },
 };
