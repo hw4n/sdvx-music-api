@@ -9,6 +9,16 @@ router.get('/', (req: express.Request, res) => {
   const titleRegex = RegExp(title, 'i');
   const artistRegex = RegExp(artist, 'i');
 
+  if (!title && !artist) {
+    res.status(400).json({
+      error: {
+        code: 400,
+        message: 'The request is missing a valid query string.',
+      },
+    });
+    return;
+  }
+
   const query = {
     $and: [],
   };
