@@ -69,8 +69,13 @@ Any form of contributions are welcome, please do if you want to!
 
 ### Acknowledgements
 
-[sdvx-song-api](https://github.com/quadstar/sdvx-song-api)  
-[Template for API Documentation](https://gist.github.com/iros/3426278)  
+``fixBrokenChars()`` from [SDVX-Song-Extractor](https://github.com/mon/SDVX-Song-Extractor/blob/master/extractor.py#L326-L355)
+
+Documentations from
+ * [sdvx-song-api](https://github.com/quadstar/sdvx-song-api)  
+ * [Template for API Documentation](https://gist.github.com/iros/3426278)  
+
+Thank you for helping throughout the project!
 
 - - -
 
