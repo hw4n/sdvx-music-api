@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-param-reassign */
-import Iconv from 'iconv';
+const { Iconv } = require('iconv');
 
 const fs = require('fs');
 const convert = require('xml-js');
@@ -9,7 +9,37 @@ const musicDB = fs.readFileSync('./data/music_db.xml');
 
 const iconv = new Iconv('SHIFT_JIS', 'UTF-8//translit//ignore');
 
-const utf8xml = iconv.convert(musicDB).toString();
+let utf8xml = iconv.convert(musicDB).toString();
+
+const replacements = [
+  ['\u203E', '~'],
+  ['\u301C', '～'],
+  ['\u49FA', 'ê'],
+  ['\u5F5C', 'ū'],
+  ['\u66E6', 'à'],
+  ['\u66E9', 'è'],
+  ['\u8E94', '🐾'],
+  ['\u9A2B', 'á'],
+  ['\u9A69', 'Ø'],
+  ['\u9A6B', 'ā'],
+  ['\u9A6A', 'ō'],
+  ['\u9AAD', 'ü'],
+  ['\u9B2F', 'ī'],
+  ['\u9EF7', 'ē'],
+  ['\u9F63', 'Ú'],
+  ['\u9F67', 'Ä'],
+  ['\u973B', '♠'],
+  ['\u9F6A', '♣'],
+  ['\u9448', '♦'],
+  ['\u9F72', '♥'],
+  ['\u9F76', '♡'],
+  ['\u9F77', 'é'],
+];
+
+replacements.forEach((replacement) => {
+  const [target, substitute] = replacement;
+  utf8xml = utf8xml.replace(RegExp(target, 'g'), substitute);
+});
 
 // fs.writeFileSync('./data/music_db_utf8.xml', utf8xml);
 
