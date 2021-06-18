@@ -38,9 +38,9 @@ router.get('/', (req: express.Request, res) => {
   if (artist) {
     query.$and.push({
       $or: [{
-        'info.artist_name': titleRegex,
+        'info.artist_name': artistRegex,
       }, {
-        'info.artist_yomigana': titleRegex,
+        'info.artist_yomigana': artistRegex,
       }, {
         'info.ascii': artistRegex,
       }],
