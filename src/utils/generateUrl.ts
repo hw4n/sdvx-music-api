@@ -15,12 +15,15 @@ function coverUrl(baseUrl, diff, diffcode) {
 
 const coverdirs = fs.readdirSync('./cover');
 function directoryByAscii(ascii: string) {
-  return coverdirs.filter((dir) => dir.includes(ascii))[0];
+  const dirname = coverdirs.filter((dir) => dir.includes(ascii))[0];
+  const newlabel = dirname.slice(0, 4);
+  return [dirname, newlabel];
 }
 
 export default function generateUrl(music: IMusic) {
-  const { label, ascii } = music.info;
-  const baseUrl = `/cover/${directoryByAscii(ascii)}/jk_${label}`;
+  const { ascii } = music.info;
+  const [dirname, newlabel] = directoryByAscii(ascii);
+  const baseUrl = `/cover/${dirname}/jk_${newlabel}`;
   // eslint-disable-next-line object-curly-newline
   const { novice, advanced, exhaust, infinite, maximum } = music.difficulty;
   return {
