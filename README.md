@@ -49,6 +49,22 @@ yarn parsexml
 
 then ``data/music_db.json`` should be generated.
 
+### Importing cover artworks
+
+copy ``data/music`` directory from somewhere, to ``cover``
+
+so the repo's directory may look like the following:
+
+```
+cover <--- need this!
+data
+node_modules
+dist
+src
+README.md
+...
+```
+
 ### Starting server
 
 Compile Typescript then run
@@ -121,7 +137,7 @@ Searches music by query string.
           "title_name": "Daisycutter",
           "title_yomigana": "ﾃﾞｲｼﾞｰｶｯﾀｰ",
           "artist_name": "ETIA.",
-          "artist_yomigana": "ｴﾁｱ",
+          "artist_yomigana": "ｲｰｼｬ",
           "ascii": "daisycutter_etia",
           "bpm_max": 19100,
           "bpm_min": 19100,
@@ -156,7 +172,29 @@ Searches music by query string.
             "effected_by": "The Hirayasu Matsudo"
           }
         },
-        "_id": "606dc2ef09ded33934121893",
+        "cover": {
+          "novice": {
+            "s": "/cover/1663_daisycutter_etia/jk_1663_1_s.png",
+            "m": "/cover/1663_daisycutter_etia/jk_1663_1.png",
+            "b": "/cover/1663_daisycutter_etia/jk_1663_1_b.png"
+          },
+          "advanced": {
+            "s": "/cover/1663_daisycutter_etia/jk_1663_2_s.png",
+            "m": "/cover/1663_daisycutter_etia/jk_1663_2.png",
+            "b": "/cover/1663_daisycutter_etia/jk_1663_2_b.png"
+          },
+          "exhaust": {
+            "s": "/cover/1663_daisycutter_etia/jk_1663_3_s.png",
+            "m": "/cover/1663_daisycutter_etia/jk_1663_3.png",
+            "b": "/cover/1663_daisycutter_etia/jk_1663_3_b.png"
+          },
+          "maximum": {
+            "s": "/cover/1663_daisycutter_etia/jk_1663_5_s.png",
+            "m": "/cover/1663_daisycutter_etia/jk_1663_5.png",
+            "b": "/cover/1663_daisycutter_etia/jk_1663_5_b.png"
+          }
+        },
+        "_id": "60cd912761b08808d422c510",
         "__v": 0
       }
     ]
