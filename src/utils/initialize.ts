@@ -1,6 +1,7 @@
 import fs from 'fs';
 import mongoose from 'mongoose';
 import dbMusic from '../models/Music';
+import generateUrl from './generateUrl';
 
 function connectDB() {
   mongoose.connect(process.env.DBURI, {
@@ -13,7 +14,12 @@ function connectDB() {
 }
 
 function insertMusicArray() {
-  const json = JSON.parse(fs.readFileSync('./data/music_db.json').toString());
+  let json = JSON.parse(fs.readFileSync('./data/music_db.json').toString());
+  json = json.map((music) => {
+    // eslint-disable-next-line no-param-reassign
+    music.cover = generateUrl(music);
+    return music;
+  });
   dbMusic.insertMany(json).then(() => {
     console.log('Inserted music data to database');
   });
