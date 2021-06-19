@@ -16,6 +16,8 @@ initialize(argv);
 app.use(cors());
 app.use('/v1', musicRoute);
 
+app.use('/cover', express.static('cover'));
+
 const PORT = process.env.PORT || 3333;
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
