@@ -42,6 +42,33 @@ export interface IMusic extends Document {
       effected_by: String,
     },
   },
+  cover: {
+    novice: {
+      s: string,
+      m: string,
+      b: string,
+    },
+    advanced: {
+      s: string,
+      m: string,
+      b: string,
+    },
+    exhaust: {
+      s: string,
+      m: string,
+      b: string,
+    },
+    infinite: {
+      s: string,
+      m: string,
+      b: string,
+    },
+    maximum: {
+      s: string,
+      m: string,
+      b: string,
+    },
+  }
 }
 
 const musicSchema = new Schema({
@@ -83,6 +110,33 @@ const musicSchema = new Schema({
       difnum: { type: Number },
       illustrator: { type: String },
       effected_by: { type: String },
+    },
+  },
+  cover: {
+    novice: {
+      s: { type: String },
+      m: { type: String },
+      b: { type: String },
+    },
+    advanced: {
+      s: { type: String },
+      m: { type: String },
+      b: { type: String },
+    },
+    exhaust: {
+      s: { type: String },
+      m: { type: String },
+      b: { type: String },
+    },
+    infinite: {
+      s: { type: String },
+      m: { type: String },
+      b: { type: String },
+    },
+    maximum: {
+      s: { type: String },
+      m: { type: String },
+      b: { type: String },
     },
   },
 });
