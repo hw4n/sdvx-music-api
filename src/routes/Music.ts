@@ -3,6 +3,8 @@ import dbMusic from '../models/Music';
 
 const router = express.Router();
 
+import fs from 'fs';
+
 router.get('/', (req: express.Request, res) => {
   const title: string = req.query.title as string;
   const artist: string = req.query.artist as string;
@@ -48,6 +50,20 @@ router.get('/', (req: express.Request, res) => {
   }
 
   dbMusic.find(query).then((found) => {
+    if (found.length >= 10) {
+      // exact search
+      const exact = found.filter((music) => {
+        // eslint-disable-next-line camelcase
+        const { title_name, artist_name } = music.info;
+        return (
+          title.toLowerCase() === title_name.toLowerCase()
+          || artist === artist_name.toLowerCase()
+        );
+      });
+      if (exact.length === 1) {
+        return res.status(200).json(exact);
+      }
+    }
     res.status(200).json(found);
   });
 });
