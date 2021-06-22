@@ -6,10 +6,11 @@ function coverUrl(baseUrl, diff, diffcode) {
     return null;
   }
   const { difnum } = diff;
-  return parseInt(difnum, 10) !== 0 ? {
-    s: `${baseUrl}_${diffcode}_s.png`,
-    m: `${baseUrl}_${diffcode}.png`,
-    b: `${baseUrl}_${diffcode}_b.png`,
+  const filename = `${baseUrl}_${diffcode}`;
+  return parseInt(difnum, 10) !== 0 && fs.existsSync(`.${filename}.png`) ? {
+    s: `${filename}_s.png`,
+    m: `${filename}.png`,
+    b: `${filename}_b.png`,
   } : null;
 }
 
@@ -26,11 +27,17 @@ export default function generateUrl(music: IMusic) {
   const baseUrl = `/cover/${dirname}/jk_${newlabel}`;
   // eslint-disable-next-line object-curly-newline
   const { novice, advanced, exhaust, infinite, maximum } = music.difficulty;
+  const nov = coverUrl(baseUrl, novice, 1);
+  const adv = coverUrl(baseUrl, advanced, 2);
+  const exh = coverUrl(baseUrl, exhaust, 3);
+  const inf = coverUrl(baseUrl, infinite, 4);
+  const mxm = coverUrl(baseUrl, maximum, 5);
   return {
-    novice: coverUrl(baseUrl, novice, 1),
-    advanced: coverUrl(baseUrl, advanced, 2),
-    exhaust: coverUrl(baseUrl, exhaust, 3),
-    infinite: coverUrl(baseUrl, infinite, 4),
-    maximum: coverUrl(baseUrl, maximum, 5),
+    novice: nov,
+    // harder difficulty might use previous cover art
+    advanced: adv || nov,
+    exhaust: exh || adv || nov,
+    infinite: infinite && infinite.difnum > 0 ? (inf || exh || adv || nov) : null,
+    maximum: maximum && maximum.difnum > 0 ? (mxm || exh || adv || nov) : null,
   };
 }
