@@ -5,9 +5,8 @@ function coverUrl(baseUrl, diff, diffcode) {
   if (diff === undefined) {
     return null;
   }
-  const { difnum } = diff;
   const filename = `${baseUrl}_${diffcode}`;
-  return parseInt(difnum, 10) !== 0 && fs.existsSync(`.${filename}.png`) ? {
+  return fs.existsSync(`.${filename}.png`) ? {
     s: `${filename}_s.png`,
     m: `${filename}.png`,
     b: `${filename}_b.png`,
@@ -33,10 +32,10 @@ export default function generateUrl(music: IMusic) {
   const inf = coverUrl(baseUrl, infinite, 4);
   const mxm = coverUrl(baseUrl, maximum, 5);
   return {
-    novice: nov,
+    novice: novice && novice.difnum > 0 ? nov : null,
     // harder difficulty might use previous cover art
-    advanced: adv || nov,
-    exhaust: exh || adv || nov,
+    advanced: advanced && advanced.difnum > 0 ? (adv || nov) : null,
+    exhaust: exhaust && exhaust.difnum > 0 ? (exh || adv || nov) : null,
     infinite: infinite && infinite.difnum > 0 ? (inf || exh || adv || nov) : null,
     maximum: maximum && maximum.difnum > 0 ? (mxm || exh || adv || nov) : null,
   };
